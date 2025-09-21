@@ -1,27 +1,211 @@
-import { Button } from "$lib/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "$lib/components/ui/card"
-import { Input } from "$lib/components/ui/input"
-import { Badge } from "$lib/components/ui/badge"
-import {
-  Star,
-  Users,
-  Trophy,
-  Calendar,
-  Play,
-  Mail,
-  Github,
-  Twitter,
-  Diamond as Discord,
-  Menu,
-  Search,
-  Bell,
-  User,
-} from "lucide-react"
+"use client"
 
-export default function GamingPlatformLanding() {
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import { Button } from "$lib/components/ui/button"
+import { Card } from "$lib/components/ui/card"
+import { ChevronLeft, ChevronRight, ChevronDown, Menu, Star, Users, Play, Search, Bell, User, Trophy, Zap, Target, ArrowRight, Calendar, Clock } from "lucide-react"
+import { useNavigation } from "src/navigation/NavigationContext"
+
+export default function GamingPlatform() {
+  const [currentVideo, setCurrentVideo] = useState(0)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  const { goto } = useNavigation()
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const videoCarousel = [
+    {
+      title: "Black Myth: Wukong",
+      url: "https://cdn.edge-net.co/game_assets/47358f5d1cc64c7ba959262d1629467d1f365ba9b9e04bf5b74d9375cefdfe01/videos/video_hero_banner_16_9/black-myth-wukong-video-hero-banner-16-91725974664.mp4",
+    },
+    {
+      title: "Elden Ring",
+      url: "https://cdn.edge-net.co/game_assets/726b93dda0cc49be8854e2d553b6a924022b39cd981044e8bea36418d618a975/videos/video_hero_banner_16_9/elden-ring-nightreign-video-hero-banner-16-91748597225.mp4",
+    },
+    {
+      title: "Avatar",
+      url: "https://cdn.edge-net.co/game_assets/b4e5dcfd427f468b9a659181a7d99a404568273e1e8b48abbd824c36d46db81c/videos/video_hero_banner_16_9/avatar-frontiers-of-pandora-video-hero-banner-16-91747294551.mp4",
+    },
+    {
+      title: "Assassins Creed",
+      url: "https://cdn.edge-net.co/game_assets/fa64907543cc427bbcb29373bae12b12b9e3cac65dc9474d93f4246bcfad730b/videos/video_hero_banner_16_9/assassins-creed-shadows-video-hero-banner-16-91747114382.mp4",
+    },
+  ]
+
+  const weeklyTournaments = [
+    {
+      id: 1,
+      title: "FORTNITE",
+      schedule: "Every Friday at 7 PM",
+      format: "SOLO OR DUOS",
+      description:
+        "Compete against other players in a battle royale format for the chance to win exclusive in-game prizes and bragging rights!",
+    },
+    {
+      id: 2,
+      title: "FC 2025",
+      schedule: "Every Friday at 7 PM",
+      format: "SINGLE ELIMINATION",
+      description:
+        "Compete against other players in a battle royale format for the chance to win exclusive in-game prizes and bragging rights!",
+    },
+    {
+      id: 3,
+      title: "UFC 5",
+      schedule: "Every Friday at 7 PM",
+      format: "SINGLE ELIMINATION",
+      description:
+        "Compete against other players in a battle royale format for the chance to win exclusive in-game prizes and bragging rights!",
+    },
+    {
+      id: 4,
+      title: "COUNTER STRIKE 2",
+      schedule: "Every Friday at 7 PM",
+      format: "GROUP STAGE",
+      description:
+        "Compete against other players in a battle royale format for the chance to win exclusive in-game prizes and bragging rights!",
+    },
+  ]
+
+  const featuredTournaments = [
+    {
+      id: 1,
+      title: "PHANTOM PRO SERIES",
+      dateRange: "Aug 15 - Sep 3, 2024",
+      status: "ONLINE",
+      format: "GROUP STAGE + BRACKET",
+      description:
+        "Compete against other players in a battle royale format for the chance to win exclusive in-game prizes and bragging rights!",
+      image: "https://picsum.photos/800/400",
+    },
+    {
+      id: 2,
+      title: "IGNITION CUP 2024",
+      dateRange: "Oct 10 - Nov 1, 2024",
+      status: "ONLINE",
+      format: "SINGLE ELIMINATION",
+      description:
+        "Compete against other players in a battle royale format for the chance to win exclusive in-game prizes and bragging rights!",
+      image: "https://picsum.photos/800/400",
+    },
+  ]
+
+  const featuredGames = [
+    {
+      id: 1,
+      title: "Cyber Warriors",
+      description: "Fast-paced multiplayer battle arena with next-gen graphics",
+      category: "Action",
+      rating: 4.8,
+      players: "2.5M",
+      image: "https://picsum.photos/seed/5/800/400",
+      featured: true,
+    },
+    {
+      id: 2,
+      title: "Neon Racers",
+      description: "High-speed racing through futuristic cityscapes",
+      category: "Racing",
+      rating: 4.6,
+      players: "1.8M",
+      image: "https://picsum.photos/seed/5/800/400",
+      featured: true,
+    },
+    {
+      id: 3,
+      title: "Space Odyssey",
+      description: "Epic space exploration and combat adventure",
+      category: "Adventure",
+      rating: 4.9,
+      players: "3.2M",
+      image: "https://picsum.photos/seed/5/800/400",
+      featured: true,
+    },
+  ]
+
+  const popularGames = [
+    {
+      id: 4,
+      title: "Battle Royale X",
+      description: "Ultimate survival battle with 100 players",
+      category: "Battle Royale",
+      rating: 4.7,
+      players: "5.1M",
+      image: "https://picsum.photos/seed/0/800/400",
+    },
+    {
+      id: 5,
+      title: "Mystic Realms",
+      description: "Fantasy RPG with magical worlds to explore",
+      category: "RPG",
+      rating: 4.5,
+      players: "2.9M",
+      image: "https://picsum.photos/seed/0/800/400",
+    },
+    {
+      id: 6,
+      title: "Quantum Strike",
+      description: "Tactical shooter with quantum mechanics",
+      category: "Shooter",
+      rating: 4.8,
+      players: "4.3M",
+      image: "https://picsum.photos/seed/0/800/400",
+    },
+    {
+      id: 7,
+      title: "Dragon's Legacy",
+      description: "Medieval fantasy with epic dragon battles",
+      category: "Fantasy",
+      rating: 4.6,
+      players: "1.7M",
+      image: "https://picsum.photos/seed/0/800/400",
+    },
+    {
+      id: 8,
+      title: "Mech Warfare",
+      description: "Giant robot battles in post-apocalyptic world",
+      category: "Mech",
+      rating: 4.4,
+      players: "2.1M",
+      image: "https://picsum.photos/seed/0/800/400",
+    },
+    {
+      id: 9,
+      title: "Stellar Command",
+      description: "Strategic space conquest and fleet management",
+      category: "Strategy",
+      rating: 4.7,
+      players: "1.3M",
+      image: "https://picsum.photos/seed/0/800/400",
+    },
+  ]
+
+  const nextVideo = () => {
+    setCurrentVideo((prev) => (prev + 1) % videoCarousel.length)
+  }
+
+  const prevVideo = () => {
+    setCurrentVideo((prev) => (prev - 1 + videoCarousel.length) % videoCarousel.length)
+  }
+
   return (
-    <div className="min-h-screen bg-background">
-      <header className="navbar-glass sticky top-0 z-50 shadow-2xl">
+    <div className="min-h-screen bg-black text-foreground overflow-x-hidden">
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          scrolled ? "bg-white/10 backdrop-blur-md border-b border-white/10" : "bg-transparent"
+        }`}
+      >
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -33,28 +217,28 @@ export default function GamingPlatformLanding() {
             <nav className="hidden lg:flex items-center space-x-8">
               <a
                 href="#games"
-                className="text-muted-foreground hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
+                className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
               >
                 Games
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
               </a>
               <a
                 href="#tournaments"
-                className="text-muted-foreground hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
+                className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
               >
                 Tournaments
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
               </a>
               <a
                 href="#events"
-                className="text-muted-foreground hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
+                className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
               >
                 Events
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
               </a>
               <a
-                href="#newsletter"
-                className="text-muted-foreground hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
+                href="#community"
+                className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
               >
                 Community
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
@@ -65,7 +249,7 @@ export default function GamingPlatformLanding() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="hidden md:flex text-muted-foreground hover:text-white hover:bg-white/10 transition-all duration-300"
+                className="hidden md:flex text-white hover:text-white bg-white/10 hover:bg-white/20 transition-all duration-300"
               >
                 <Search className="w-4 h-4 mr-2" />
                 Search
@@ -73,7 +257,7 @@ export default function GamingPlatformLanding() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="hidden md:flex text-muted-foreground hover:text-white hover:bg-white/10 transition-all duration-300 relative"
+                className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300 relative"
               >
                 <Bell className="w-4 h-4" />
                 <span className="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full"></span>
@@ -81,13 +265,16 @@ export default function GamingPlatformLanding() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="hidden md:flex text-muted-foreground hover:text-white hover:bg-white/10 transition-all duration-300"
+                className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300"
               >
                 <User className="w-4 h-4 mr-2" />
                 Login
               </Button>
               <Button
                 size="sm"
+                onClick={() => {
+                  goto("/signup")
+                }}
                 className="gradient-accent hover:opacity-90 font-bold shadow-lg border border-white/20 hover:scale-105 transition-all duration-300"
               >
                 Get Started
@@ -98,304 +285,678 @@ export default function GamingPlatformLanding() {
             </div>
           </div>
         </div>
-      </header>
+      </motion.nav>
 
-      <section className="relative py-32 px-6 text-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
-        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-gray-800/20 to-transparent"></div>
-
-        {/* Animated light beams background */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Diagonal light beams */}
-          <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-white/20 to-transparent transform rotate-12 animate-pulse"></div>
-          <div className="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-white/15 to-transparent transform -rotate-12 animate-pulse delay-1000"></div>
-          <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-white/25 to-transparent transform rotate-6 animate-pulse delay-2000"></div>
-
-          {/* Horizontal light beams */}
-          <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse delay-500"></div>
-          <div className="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/15 to-transparent animate-pulse delay-1500"></div>
-
-          {/* Moving light orbs */}
-          <div className="absolute top-1/3 left-1/4 w-4 h-4 bg-white/30 rounded-full blur-sm animate-ping"></div>
-          <div className="absolute top-2/3 right-1/3 w-3 h-3 bg-white/40 rounded-full blur-sm animate-ping delay-700"></div>
-          <div className="absolute top-1/2 left-3/4 w-2 h-2 bg-white/50 rounded-full blur-sm animate-ping delay-1200"></div>
-
-          {/* Scanning beam effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse duration-3000"></div>
-        </div>
-
-        {/* Enhanced particles background */}
+      <section className="relative h-screen overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/30 rounded-full animate-pulse"></div>
-          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-white/40 rounded-full animate-ping"></div>
-          <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-white/20 rounded-full animate-pulse delay-300"></div>
-          <div className="absolute top-1/2 right-1/4 w-1 h-1 bg-white/50 rounded-full animate-ping delay-600"></div>
-          <div className="absolute bottom-1/3 right-1/2 w-2 h-2 bg-white/25 rounded-full animate-pulse delay-900"></div>
-          <div className="absolute top-1/6 left-2/3 w-1 h-1 bg-white/35 rounded-full animate-pulse delay-1100"></div>
-          <div className="absolute bottom-1/6 left-1/6 w-1.5 h-1.5 bg-white/30 rounded-full animate-pulse delay-1400"></div>
+          <video key={currentVideo} autoPlay muted loop playsInline className="w-full h-full object-cover">
+            <source src={videoCarousel[currentVideo].url} type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-purple-900/30 via-transparent to-black/80" />
         </div>
 
-        {/* Mesh gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/40"></div>
-
-        <div className="relative container mx-auto max-w-6xl">
-          <div className="inline-flex items-center px-6 py-3 rounded-full glass-effect mb-8 hover:scale-105 transition-transform duration-300 border border-white/10">
-            <span className="text-white text-sm font-bold mr-2">⚡</span>
-            <span className="text-white text-sm font-semibold">Next-Generation Gaming Platform</span>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 w-96 h-96 hidden md:block">
+            <div className="relative w-full h-full">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-transparent transform -skew-x-12 rotate-12" />
+              <div className="absolute inset-4 bg-gradient-to-r from-purple-500/10 to-transparent transform -skew-x-12 rotate-12" />
+            </div>
           </div>
-          <h1 className="text-6xl md:text-8xl font-black text-balance mb-8 text-white leading-none tracking-tight drop-shadow-2xl">
-            DOMINATE
-            <span className="block gradient-text">THE ARENA</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground text-pretty mb-12 max-w-4xl mx-auto leading-relaxed">
-            Experience the ultimate gaming ecosystem where skill meets technology. Compete in tournaments, discover new
-            worlds, and rise through the ranks with the most advanced gaming platform ever created.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Button
-              size="lg"
-              className="text-lg px-12 py-6 gradient-accent hover:opacity-90 font-bold shadow-2xl hover:scale-105 transition-all duration-300 border border-white/20"
+
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 hidden md:block">
+            <div className="relative w-full h-full">
+              <div className="absolute inset-0 bg-gradient-to-l from-purple-600/20 to-transparent transform skew-x-12 -rotate-12" />
+              <div className="absolute inset-4 bg-gradient-to-l from-purple-500/10 to-transparent transform skew-x-12 -rotate-12" />
+            </div>
+          </div>
+        </div>
+
+        <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-6">
+          <div className="text-center space-y-6 md:space-y-8 max-w-7xl w-full">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-3 py-2 md:px-4 md:py-2 bg-orange-500/20 border border-orange-500/30 rounded-full text-orange-400 text-xs sm:text-sm font-medium mb-6 md:mb-8"
             >
-              Enter the Arena
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="text-lg px-12 py-6 border-white/40 text-white hover:bg-white/10 bg-transparent font-semibold hover:scale-105 transition-all duration-300"
+              <span>⚡</span>
+              <span className="hidden sm:inline">Next-Generation Gaming Platform</span>
+              <span className="sm:hidden">Next-Gen Gaming</span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="font-[Saira_Extra_Condensed] text-5xl sm:text-6xl md:text-7xl lg:text-[8rem] xl:text-[10rem] font-black text-white tracking-wider leading-none"
             >
-              Watch Trailer
-            </Button>
+              DOMINATE
+              <br />
+              THE ARENA
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-base sm:text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-4"
+            >
+              Experience the ultimate gaming ecosystem where skill meets technology. 
+              <span className="hidden sm:inline"> Compete in tournaments, discover
+              new worlds, and rise through the ranks with the most advanced gaming platform ever created.</span>
+              <span className="sm:hidden"> Compete, discover, and rise through the ranks.</span>
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 }}
+              className="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8 py-8 md:py-16"
+            >
+              {/* Desktop navigation */}
+              <div className="hidden md:flex items-center space-x-8">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={prevVideo}
+                  className="text-white hover:bg-white/10 w-12 h-12"
+                >
+                  <ChevronLeft className="h-8 w-8" />
+                </Button>
+
+                <div className="flex space-x-4">
+                  {videoCarousel.map((video, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentVideo(index)}
+                      className={`px-6 py-3 rounded-lg border transition-all duration-300 ${
+                        index === currentVideo
+                          ? "bg-purple-600/30 border-purple-400 text-white"
+                          : "bg-black/30 border-purple-600/30 text-gray-400 hover:bg-purple-600/20"
+                      }`}
+                    >
+                      {video.title}
+                    </button>
+                  ))}
+                </div>
+
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={nextVideo}
+                  className="text-white hover:bg-white/10 w-12 h-12"
+                >
+                  <ChevronRight className="h-8 w-8" />
+                </Button>
+              </div>
+
+              {/* Mobile navigation */}
+              <div className="md:hidden w-full max-w-sm">
+                <div className="flex items-center justify-between mb-4">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={prevVideo}
+                    className="text-white hover:bg-white/10 w-10 h-10"
+                  >
+                    <ChevronLeft className="h-6 w-6" />
+                  </Button>
+                  
+                  <div className="text-white text-sm font-medium">
+                    {currentVideo + 1} / {videoCarousel.length}
+                  </div>
+                  
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={nextVideo}
+                    className="text-white hover:bg-white/10 w-10 h-10"
+                  >
+                    <ChevronRight className="h-6 w-6" />
+                  </Button>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2">
+                  {videoCarousel.map((video, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentVideo(index)}
+                      className={`px-3 py-2 rounded-lg border transition-all duration-300 text-xs ${
+                        index === currentVideo
+                          ? "bg-purple-600/30 border-purple-400 text-white"
+                          : "bg-black/30 border-purple-600/30 text-gray-400 hover:bg-purple-600/20"
+                      }`}
+                    >
+                      {video.title}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2"
+        >
+          <ChevronDown className="w-6 h-6 md:w-8 md:h-8 text-white animate-bounce" />
+        </motion.div>
+
+        <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-gray-600 text-xs tracking-widest transform rotate-90 origin-center hidden lg:block">
+          <div className="space-y-4">
+            <div>GAMING</div>
+            <div>PLATFORM</div>
+            <div>EXPERIENCE</div>
           </div>
         </div>
       </section>
 
-      <section id="games" className="py-24 px-6 bg-gradient-to-b from-background to-card/30">
-        <div className="container mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-black text-balance mb-6 gradient-text">Featured Games</h2>
-            <p className="text-xl text-muted-foreground text-pretty max-w-3xl mx-auto leading-relaxed">
-              Discover premium games handpicked by our community of professional gamers and industry experts.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            {[
-              {
-                title: "Cyber Warriors",
-                description: "Fast-paced multiplayer battle arena with next-gen graphics",
-                players: "2.5M",
-                rating: 4.8,
-                image: "/futuristic-cyber-warriors-game.jpg",
-                genre: "Action",
-              },
-              {
-                title: "Kingdom Builder",
-                description: "Strategic city building simulation with deep mechanics",
-                players: "1.8M",
-                rating: 4.6,
-                image: "/medieval-kingdom-building-game.jpg",
-                genre: "Strategy",
-              },
-              {
-                title: "Space Odyssey",
-                description: "Epic space exploration adventure with stunning visuals",
-                players: "3.2M",
-                rating: 4.9,
-                image: "/space-exploration-game.png",
-                genre: "Adventure",
-              },
-              {
-                title: "Neon Racers",
-                description: "High-speed cyberpunk racing with customizable vehicles",
-                players: "1.2M",
-                rating: 4.7,
-                image: "/neon-cyberpunk-racing-game.jpg",
-                genre: "Racing",
-              },
-              {
-                title: "Dragon's Quest",
-                description: "Fantasy RPG with epic battles and immersive storyline",
-                players: "2.8M",
-                rating: 4.8,
-                image: "/fantasy-dragon-rpg-game.jpg",
-                genre: "RPG",
-              },
-              {
-                title: "Zombie Survival",
-                description: "Intense survival horror experience with co-op gameplay",
-                players: "1.5M",
-                rating: 4.5,
-                image: "/zombie-survival-horror.png",
-                genre: "Horror",
-              },
-              {
-                title: "Mech Warriors",
-                description: "Giant robot combat simulator with tactical depth",
-                players: "900K",
-                rating: 4.6,
-                image: "/mech-robot-combat-game.jpg",
-                genre: "Action",
-              },
-              {
-                title: "Pirate's Treasure",
-                description: "Naval adventure and exploration with multiplayer raids",
-                players: "1.1M",
-                rating: 4.4,
-                image: "/pirate-naval-adventure-game.jpg",
-                genre: "Adventure",
-              },
-            ].map((game, index) => (
-              <Card
-                key={index}
-                className="overflow-hidden hover:shadow-2xl transition-all duration-500 glass-effect hover:border-white/30 group hover:scale-105 border border-white/10"
+      <section
+        id="tournaments"
+        className="py-20 bg-gradient-to-b from-gaming-darker via-purple-950/20 to-gaming-darker relative overflow-hidden"
+      >
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 border border-white/20 text-white text-sm font-semibold tracking-wide mb-8 backdrop-blur-sm"
+            >
+              [ WEEKLY SHOWDOWN ]
+            </motion.div>
+            <motion.h2
+              className="text-4xl md:text-6xl font-black text-white tracking-wider mb-6 leading-tight"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              AN EXCITING LINEUP OF TOURNAMENTS
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
+                FOR GAMERS OF ALL SKILL LEVELS.
+              </span>
+            </motion.h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+            {weeklyTournaments.map((tournament, index) => (
+              <motion.div
+                key={tournament.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group cursor-pointer"
               >
-                <div className="aspect-video bg-muted relative overflow-hidden">
-                  <img
-                    src={game.image || "/placeholder.svg"}
-                    alt={game.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Button size="sm" className="gradient-accent font-bold border border-white/20">
-                      Play Now
+                <Card className="rounded-none bg-white/5 backdrop-blur-xl border border-white/10 p-8 transition-all duration-500 hover:border-purple-500/50 hover:bg-white/10 hover:backdrop-blur-2xl hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20 h-full overflow-hidden relative">
+                  {/* Glassmorphism gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Animated purple glow */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-purple-400/0 to-pink-500/0 group-hover:from-purple-500/10 group-hover:via-purple-400/5 group-hover:to-pink-500/10 transition-all duration-700" />
+                  
+                  <div className="relative z-10 space-y-6">
+                    <div>
+                      <h3 className="text-xl font-bold text-white/90 mb-3 group-hover:text-white transition-colors duration-300 leading-tight">
+                        {tournament.title}
+                      </h3>
+                      <div className="flex items-center gap-2 text-white/60 text-sm mb-4 group-hover:text-purple-300 transition-colors duration-300">
+                        <Clock className="w-4 h-4" />
+                        <span className="font-medium">{tournament.schedule}</span>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white/80 text-xs font-bold uppercase tracking-wider group-hover:bg-purple-500/20 group-hover:border-purple-400/50 group-hover:text-purple-200 transition-all duration-300">
+                        {tournament.format}
+                      </div>
+                      <p className="text-white/70 text-sm leading-relaxed font-medium group-hover:text-white/90 transition-colors duration-300">
+                        {tournament.description}
+                      </p>
+                    </div>
+
+                    <Button
+                      size="sm"
+                      className="rounded-none w-full bg-white/10 backdrop-blur-sm text-white border border-white/20 hover:bg-purple-500/30 hover:border-purple-400/60 hover:text-white transition-all duration-300 group-hover:scale-105 font-semibold tracking-wide py-3"
+                    >
+                      LEARN MORE
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                     </Button>
                   </div>
-                </div>
-                <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between mb-3">
-                    <Badge variant="secondary" className="bg-white/10 text-white border-white/20 font-semibold">
-                      {game.genre}
-                    </Badge>
-                    <div className="flex items-center space-x-1">
-                      <Star className="w-4 h-4 fill-white text-white" />
-                      <span className="text-sm font-bold text-white">{game.rating}</span>
+
+                  {/* Glass reflection effect */}
+                  <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Corner glow accent */}
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-purple-400/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <p className="text-gray-400 text-lg max-w-3xl mx-auto leading-relaxed">
+              With top-tier players, cutting-edge strategies, and an unbreakable spirit, we dominate the esports scene.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {featuredTournaments.map((tournament, index) => (
+              <motion.div
+                key={tournament.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className="group cursor-pointer"
+              >
+                <Card className="rounded-none bg-black/40 backdrop-blur-md border border-white/10 overflow-hidden hover:border-purple-500/50 hover:bg-black/60 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20 relative">
+                  {/* Corner decorative elements */}
+                  <div className="absolute top-0 left-0 w-6 h-6 border-l-2 border-t-2 border-purple-500/60" />
+                  <div className="absolute top-0 right-0 w-6 h-6 border-r-2 border-t-2 border-purple-500/60" />
+                  <div className="absolute bottom-0 left-0 w-6 h-6 border-l-2 border-b-2 border-purple-500/60" />
+                  <div className="absolute bottom-0 right-0 w-6 h-6 border-r-2 border-b-2 border-purple-500/60" />
+
+                  <div className="relative h-64 overflow-hidden">
+                    <img
+                      src={tournament.image || "/placeholder.svg"}
+                      alt={tournament.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+                    {/* Status badge */}
+                    <div className="absolute top-6 right-6">
+                      <span className="px-4 py-2 bg-black/60 backdrop-blur-sm text-white text-xs font-bold tracking-wider border border-purple-500/40">
+                        [ {tournament.status} ]
+                      </span>
+                    </div>
+
+                    {/* Tournament info overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <div className="space-y-3">
+                        <h3 className="text-2xl font-bold text-white tracking-wide group-hover:text-purple-300 transition-colors duration-300">
+                          {tournament.title}
+                        </h3>
+                        <div className="text-gray-300 text-sm font-medium tracking-wide">
+                          {tournament.dateRange}
+                        </div>
+                        
+                        <div className="inline-block px-3 py-1 bg-black/50 backdrop-blur-sm border border-purple-500/40 text-purple-300 text-xs font-bold tracking-wider">
+                          {tournament.format}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <CardTitle className="text-xl mb-2 font-bold">{game.title}</CardTitle>
-                  <CardDescription className="text-muted-foreground leading-relaxed text-sm">
-                    {game.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                      <Users className="w-4 h-4" />
-                      <span className="font-semibold">{game.players} players</span>
+
+                  <div className="p-6 bg-black/20 backdrop-blur-sm border-t border-white/10">
+                    <div className="space-y-4">
+                      <p className="text-gray-300 text-sm leading-relaxed font-light">
+                        {tournament.description}
+                      </p>
+
+                      <button className="group/btn relative w-full bg-transparent border border-purple-500/50 text-white hover:border-purple-400 transition-all duration-300 py-3 px-6 overflow-hidden">
+                        <span className="relative z-10 flex items-center justify-center gap-2 font-semibold tracking-wider text-sm">
+                          Learn more
+                          <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
+                        </span>
+                        <div className="absolute inset-0 bg-purple-600/0 group-hover/btn:bg-purple-600/20 transition-all duration-300" />
+                      </button>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+
+                  {/* Glassmorphism overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-transparent to-purple-500/0 group-hover:from-purple-500/10 group-hover:via-purple-400/5 group-hover:to-purple-500/10 transition-all duration-700 pointer-events-none" />
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
 
-      <section id="newsletter" className="py-20 px-4">
-        <div className="container mx-auto max-w-2xl text-center">
-          <Card className="p-10 glass-effect hover:border-white/30 transition-all duration-300 border border-white/10">
-            <CardHeader>
-              <div className="w-20 h-20 gradient-accent rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg border border-white/20">
-                <Mail className="w-10 h-10 text-white" />
-              </div>
-              <CardTitle className="text-3xl text-balance font-black mb-4">Stay in the Game</CardTitle>
-              <CardDescription className="text-pretty text-lg text-muted-foreground">
-                Get the latest updates on new games, tournaments, and exclusive content delivered straight to your
-                inbox.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="flex-1 bg-input border-white/20 focus:border-white/40 transition-colors text-white placeholder:text-white/60"
-                />
-                <Button className="sm:w-auto gradient-accent font-bold hover:opacity-90 border border-white/20">
-                  Subscribe Now
-                </Button>
-              </div>
-              <p className="text-sm text-muted-foreground mt-4">
-                Join 50,000+ gamers already subscribed. Unsubscribe anytime.
-              </p>
-            </CardContent>
-          </Card>
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-purple-500/5 rounded-full blur-xl animate-pulse" />
+          <div className="absolute bottom-20 right-10 w-48 h-48 bg-cyan-500/5 rounded-full blur-xl animate-pulse" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-500/5 rounded-full blur-2xl animate-pulse" />
         </div>
       </section>
 
-      <section id="events" className="py-20 px-4 bg-gradient-to-b from-card/20 to-background">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-black text-balance mb-6 gradient-text">Upcoming Events</h2>
-            <p className="text-muted-foreground text-pretty max-w-2xl mx-auto text-lg">
-              Don't miss out on exciting tournaments, community events, and game launches.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                title: "Summer Championship",
-                date: "July 15-17, 2024",
-                prize: "$50,000 Prize Pool",
-                participants: "500+ Teams",
-                type: "Tournament",
-              },
-              {
-                title: "New Game Launch",
-                date: "August 1, 2024",
-                prize: "Exclusive Beta Access",
-                participants: "Limited Spots",
-                type: "Launch Event",
-              },
-              {
-                title: "Community Meetup",
-                date: "August 20, 2024",
-                prize: "Free Merchandise",
-                participants: "All Welcome",
-                type: "Social Event",
-              },
-              {
-                title: "Speedrun Competition",
-                date: "September 5, 2024",
-                prize: "$10,000 Prize Pool",
-                participants: "Individual Entry",
-                type: "Competition",
-              },
-            ].map((event, index) => (
-              <Card
-                key={index}
-                className="hover:shadow-xl transition-all duration-300 glass-effect hover:border-white/30 group border border-white/10"
+      <section
+        id="games"
+        className="py-20 bg-gradient-to-b from-gaming-darker via-purple-950/20 to-gaming-darker relative overflow-hidden"
+      >
+        <div className="container mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <motion.h2
+            className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-white tracking-widest mb-8 leading-none"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            style={{
+              textShadow: '0 0 40px rgba(147, 51, 234, 0.3)',
+              filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.1))'
+            }}
+          >
+            FEATURED GAMES
+          </motion.h2>
+          
+          <motion.p
+            className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed font-light tracking-wide"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            Experience the most{' '}
+            <span className="text-white font-medium">immersive gaming adventures</span>
+          </motion.p>
+        </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+            {featuredGames.map((game, index) => (
+              <motion.div
+                key={game.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group cursor-pointer"
               >
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-4">
-                    <Badge variant="secondary" className="bg-white/10 text-white border-white/20 font-bold">
-                      {event.type}
-                    </Badge>
-                    <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-                      <Calendar className="w-5 h-5 text-primary" />
-                      <span className="font-semibold">{event.date}</span>
+                <Card className="rounded-none bg-black/40 backdrop-blur-md border border-white/10 overflow-hidden hover:border-purple-500/50 hover:bg-black/60 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20 h-96 relative">
+                  <div className="absolute top-0 left-0 w-4 h-4 border-l-2 border-t-2 border-purple-500/60 z-10" />
+                  <div className="absolute top-0 right-0 w-4 h-4 border-r-2 border-t-2 border-purple-500/60 z-10" />
+                  <div className="absolute bottom-0 left-0 w-4 h-4 border-l-2 border-b-2 border-purple-500/60 z-10" />
+                  <div className="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 border-purple-500/60 z-10" />
+
+                  <div className="relative h-56 overflow-hidden">
+                    <img
+                      src={game.image || "/placeholder.svg"}
+                      alt={game.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+                    <div className="absolute top-6 left-6">
+                      <span className="px-3 py-1 bg-black/60 backdrop-blur-sm text-purple-300 text-xs font-bold tracking-wider border border-purple-500/40">
+                        {game.category}
+                      </span>
+                    </div>
+
+                    {/* Rating badge */}
+                    <div className="absolute top-6 right-6 flex items-center gap-1 bg-black/60 backdrop-blur-sm px-3 py-1 border border-white/20">
+                      <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                      <span className="text-white text-xs font-bold tracking-wide">{game.rating}</span>
+                    </div>
+
+                    {/* Game title overlay */}
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-xl font-bold text-white tracking-wide group-hover:text-purple-300 transition-colors duration-300">
+                        {game.title}
+                      </h3>
                     </div>
                   </div>
-                  <CardTitle className="text-xl font-bold group-hover:text-white transition-colors">
-                    {event.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-3 text-sm mb-6">
-                    <div className="flex items-center space-x-3">
-                      <Trophy className="w-5 h-5 text-white" />
-                      <span className="font-semibold">{event.prize}</span>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <Users className="w-5 h-5 text-white" />
-                      <span className="font-semibold">{event.participants}</span>
+
+                  <div className="p-6 bg-black/20 backdrop-blur-sm border-t border-white/10 flex-1 flex flex-col justify-between">
+                    <div className="space-y-4">
+                      <p className="text-gray-300 text-sm leading-relaxed font-light">
+                        {game.description}
+                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-gray-400">
+                          <Users className="w-4 h-4" />
+                          <span className="text-sm font-medium tracking-wide">{game.players} players</span>
+                        </div>
+                        
+                        <button className="group/btn relative bg-transparent border border-purple-500/50 text-purple-300 hover:border-purple-400 hover:text-white transition-all duration-300 px-4 py-2 overflow-hidden">
+                          <span className="relative z-10 font-semibold tracking-wider text-sm">
+                            Play Now
+                          </span>
+                          <div className="absolute inset-0 bg-purple-600/0 group-hover/btn:bg-purple-600/20 transition-all duration-300" />
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <Button className="w-full gradient-accent font-bold hover:opacity-90 border border-white/20">
-                    Learn More
-                  </Button>
-                </CardContent>
-              </Card>
+
+                  {/* Glassmorphism overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-transparent to-purple-500/0 group-hover:from-purple-500/10 group-hover:via-purple-400/5 group-hover:to-purple-500/10 transition-all duration-700 pointer-events-none" />
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-purple-500/5 rounded-full blur-xl animate-pulse" />
+          <div className="absolute bottom-20 right-10 w-48 h-48 bg-cyan-500/5 rounded-full blur-xl animate-pulse" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-pink-500/5 rounded-full blur-2xl animate-pulse" />
+        </div>
+      </section>
+
+      <section className="min-h-[70vh] py-32 bg-gradient-to-b from-gaming-darker via-black/20 to-gaming-darker relative overflow-hidden">
+        <div className="container mx-auto px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+            className="space-y-12"
+          >
+            {/* Enhanced main heading with modern gradient */}
+            <motion.h2
+              className="text-6xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-white tracking-widest leading-none"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              style={{
+                textShadow: '0 0 40px rgba(147, 51, 234, 0.3)',
+                filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.1))'
+              }}
+            >
+              LEVEL UP
+            </motion.h2>
+
+            {/* Enhanced subtitle */}
+            <motion.p
+              className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-light tracking-wide"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+            >
+              Join millions of gamers worldwide and experience the future of{' '}
+              <span className="text-white font-medium">competitive gaming</span>
+            </motion.p>
+
+            {/* Enhanced feature badges with glassmorphism */}
+            <motion.div
+              className="flex flex-wrap justify-center gap-6 mt-20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.7 }}
+            >
+              <div className="group relative">
+                <div className="flex items-center gap-3 bg-black/30 backdrop-blur-xl border border-white/20 px-8 py-4 transition-all duration-500 hover:bg-black/50 hover:border-purple-500/40 hover:scale-105">
+                  <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-purple-500/60" />
+                  <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-purple-500/60" />
+                  <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-purple-500/60" />
+                  <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-purple-500/60" />
+                  
+                  <Trophy className="w-6 h-6 text-yellow-400 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="text-white font-semibold tracking-wide">Tournaments</span>
+                </div>
+              </div>
+
+              <div className="group relative">
+                <div className="flex items-center gap-3 bg-black/30 backdrop-blur-xl border border-white/20 px-8 py-4 transition-all duration-500 hover:bg-black/50 hover:border-purple-500/40 hover:scale-105">
+                  <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-purple-500/60" />
+                  <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-purple-500/60" />
+                  <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-purple-500/60" />
+                  <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-purple-500/60" />
+                  
+                  <Zap className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="text-white font-semibold tracking-wide">Live Streaming</span>
+                </div>
+              </div>
+
+              <div className="group relative">
+                <div className="flex items-center gap-3 bg-black/30 backdrop-blur-xl border border-white/20 px-8 py-4 transition-all duration-500 hover:bg-black/50 hover:border-purple-500/40 hover:scale-105">
+                  <div className="absolute top-0 left-0 w-3 h-3 border-l-2 border-t-2 border-purple-500/60" />
+                  <div className="absolute top-0 right-0 w-3 h-3 border-r-2 border-t-2 border-purple-500/60" />
+                  <div className="absolute bottom-0 left-0 w-3 h-3 border-l-2 border-b-2 border-purple-500/60" />
+                  <div className="absolute bottom-0 right-0 w-3 h-3 border-r-2 border-b-2 border-purple-500/60" />
+                  
+                  <Target className="w-6 h-6 text-pink-400 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="text-white font-semibold tracking-wide">Leaderboards</span>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+          {/* Animated floating orbs */}
+          <div className="absolute top-20 left-10 w-32 h-32 bg-purple-500/20 rounded-full blur-xl animate-pulse" />
+          <div className="absolute bottom-20 right-10 w-48 h-48 bg-cyan-500/15 rounded-full blur-xl animate-pulse" />
+          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-pink-500/10 rounded-full blur-lg animate-pulse" style={{ animationDelay: '1s' }} />
+          
+          {/* Subtle grid pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="w-full h-full" style={{
+              backgroundImage: 'linear-gradient(rgba(147, 51, 234, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(147, 51, 234, 0.1) 1px, transparent 1px)',
+              backgroundSize: '50px 50px'
+            }} />
+          </div>
+
+          {/* Radial gradient overlay for depth */}
+          <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-black/20" />
+        </div>
+
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-10 left-1/4 w-1 h-1 bg-white/20 rounded-full animate-bounce" style={{ animationDelay: '0s', animationDuration: '3s' }} />
+          <div className="absolute top-32 right-1/3 w-1 h-1 bg-purple-400/30 rounded-full animate-bounce" style={{ animationDelay: '1s', animationDuration: '4s' }} />
+          <div className="absolute bottom-40 left-1/3 w-1 h-1 bg-cyan-400/30 rounded-full animate-bounce" style={{ animationDelay: '2s', animationDuration: '5s' }} />
+        </div>
+      </section>
+
+      <section className="py-20 bg-gradient-to-b from-gaming-darker via-purple-950/10 to-gaming-darker relative">
+        <div className="container mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <motion.h2
+              className="text-5xl md:text-7xl font-black text-white tracking-wider mb-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              POPULAR GAMES
+            </motion.h2>
+            <motion.p
+              className="text-xl text-gray-400 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              Discover what millions of players are enjoying right now
+            </motion.p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
+            {popularGames.map((game, index) => (
+              <motion.div
+                key={game.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group cursor-pointer"
+              >
+                <Card className="rounded-none bg-black/40 backdrop-blur-md border border-white/10 overflow-hidden hover:border-purple-500/50 hover:bg-black/60 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/20 h-96 relative">
+                  <div className="absolute top-0 left-0 w-4 h-4 border-l-2 border-t-2 border-purple-500/60 z-10" />
+                  <div className="absolute top-0 right-0 w-4 h-4 border-r-2 border-t-2 border-purple-500/60 z-10" />
+                  <div className="absolute bottom-0 left-0 w-4 h-4 border-l-2 border-b-2 border-purple-500/60 z-10" />
+                  <div className="absolute bottom-0 right-0 w-4 h-4 border-r-2 border-b-2 border-purple-500/60 z-10" />
+
+                  <div className="relative h-56 overflow-hidden">
+                    <img
+                      src={game.image || "/placeholder.svg"}
+                      alt={game.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+                    <div className="absolute top-6 left-6">
+                      <span className="px-3 py-1 bg-black/60 backdrop-blur-sm text-purple-300 text-xs font-bold tracking-wider border border-purple-500/40">
+                        {game.category}
+                      </span>
+                    </div>
+
+                    <div className="absolute top-6 right-6 flex items-center gap-1 bg-black/60 backdrop-blur-sm px-3 py-1 border border-white/20">
+                      <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                      <span className="text-white text-xs font-bold tracking-wide">{game.rating}</span>
+                    </div>
+
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-xl font-bold text-white tracking-wide group-hover:text-purple-300 transition-colors duration-300">
+                        {game.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="p-6 bg-black/20 backdrop-blur-sm border-t border-white/10 flex-1 flex flex-col justify-between">
+                    <div className="space-y-4">
+                      <p className="text-gray-300 text-sm leading-relaxed font-light">
+                        {game.description}
+                      </p>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-gray-400">
+                          <Users className="w-4 h-4" />
+                          <span className="text-sm font-medium tracking-wide">{game.players} players</span>
+                        </div>
+                        
+                        <button className="group/btn relative bg-transparent border border-purple-500/50 text-purple-300 hover:border-purple-400 hover:text-white transition-all duration-300 px-4 py-2 overflow-hidden">
+                          <span className="relative z-10 font-semibold tracking-wider text-sm">
+                            Play Now
+                          </span>
+                          <div className="absolute inset-0 bg-purple-600/0 group-hover/btn:bg-purple-600/20 transition-all duration-300" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-transparent to-purple-500/0 group-hover:from-purple-500/10 group-hover:via-purple-400/5 group-hover:to-purple-500/10 transition-all duration-700 pointer-events-none" />
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>

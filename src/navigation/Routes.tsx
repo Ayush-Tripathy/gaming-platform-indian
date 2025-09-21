@@ -5,6 +5,7 @@ const Home = React.lazy(() => import("../pages/Home"));
 const NotFound = React.lazy(() => import("../pages/NotFound"));
 const SigninForm = React.lazy(() => import("../pages/Signin"));
 const SignupForm = React.lazy(() => import("../pages/signup"));
+const TermsAndConditions = React.lazy(() => import("../pages/terms-and-conditions"));
 
 export const AppRoutes = () => {
   const location = useLocation();
@@ -17,9 +18,10 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="*" element={<NotFound />} />
+      <Route path="/terms" element={<TermsAndConditions />} />
       <Route path="/signin" element={<SigninForm />} />
       <Route path="/signup" element={<SignupForm />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
