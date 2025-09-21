@@ -331,7 +331,13 @@ export default function GamingPlatform() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="font-[Saira_Extra_Condensed] text-5xl sm:text-6xl md:text-7xl lg:text-[8rem] xl:text-[10rem] font-black text-white tracking-wider leading-none"
+              className="font-[Saira_Extra_Condensed] text-5xl
+                          sm:text-6xl
+                          md:text-7xl
+                          lg:text-[8rem]
+                          xl:text-[10rem]
+                          [@media_(min-width:1024px)_and_(max-height:930px)]:!text-[6rem] 
+                          font-black text-white tracking-wider leading-none"
             >
               DOMINATE
               <br />
