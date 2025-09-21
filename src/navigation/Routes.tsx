@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import React, { useEffect } from "react";
 
 const Home = React.lazy(() => import("../pages/Home"));
+const SignUp = React.lazy(() => import("../pages/signup"));
 const NotFound = React.lazy(() => import("../pages/NotFound"));
 
 export const AppRoutes = () => {
@@ -15,6 +16,7 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/signup" element={<SignUp />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
