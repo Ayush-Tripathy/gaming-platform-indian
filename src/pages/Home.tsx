@@ -265,6 +265,9 @@ export default function GamingPlatform() {
               <Button
                 variant="ghost"
                 size="sm"
+                onClick={() => {
+                  goto("/signin")
+                }}
                 className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300"
               >
                 <User className="w-4 h-4 mr-2" />
