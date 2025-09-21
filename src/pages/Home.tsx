@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Button } from "$lib/components/ui/button"
 import { Card } from "$lib/components/ui/card"
-import { ChevronLeft, ChevronRight, ChevronDown, Menu, Star, Users, Play, Search, Bell, User, Trophy, Zap, Target, ArrowRight, Calendar, Clock } from "lucide-react"
+import { ChevronLeft, ChevronRight, ChevronDown, Menu, Star, Users, Play, Search, Bell, User, Trophy, Zap, Target, ArrowRight, Clock } from "lucide-react"
 import { useNavigation } from "src/navigation/NavigationContext"
 
 export default function GamingPlatform() {

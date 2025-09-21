@@ -358,7 +358,7 @@ const LegalPage = () => {
             <div className="absolute bottom-0 right-0 w-6 h-6 border-r-2 border-b-2 border-purple-500/60" />
 
             <div className="relative z-10 space-y-12">
-              {termsData.map((term, index) => (
+              {termsData.map((term) => (
                 <div key={term.id} className="border-b border-white/10 pb-8 last:border-b-0 last:pb-0">
                   {/* Section Header */}
                   <div className="flex items-center gap-4 mb-6">
