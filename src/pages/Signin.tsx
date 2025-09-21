@@ -115,9 +115,9 @@ export default function SigninPage() {
             {/* Login Link */}
             <div className="text-center pt-3 border-t border-purple-500/20">
               <p className="text-purple-200 text-sm">
-                Already have access?{" "}
-                <a href="/login" className="text-purple-400 hover:text-purple-300 font-medium transition-colors">
-                  Sign In
+                New to platform?{" "}
+                <a href="/signup" className="text-purple-400 hover:text-purple-300 font-medium transition-colors">
+                  Register
                 </a>
               </p>
             </div>
