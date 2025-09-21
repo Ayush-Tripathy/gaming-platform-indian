@@ -8,7 +8,7 @@ import { Input } from "$lib/components/ui/input"
 import { Label } from "$lib/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "$lib/components/ui/card"
 import { Eye, EyeOff, User, Mail, Lock } from "lucide-react"
-import signup from "../../public/images/signup-bg.png"
+import signup from "/images/signup-bg.png"
 
 export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false)
