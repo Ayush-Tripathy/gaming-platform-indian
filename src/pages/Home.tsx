@@ -9,7 +9,6 @@ import { useNavigation } from "src/navigation/NavigationContext"
 
 export default function GamingPlatform() {
   const [currentVideo, setCurrentVideo] = useState(0)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   const { goto } = useNavigation()

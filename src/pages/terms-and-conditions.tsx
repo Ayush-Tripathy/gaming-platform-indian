@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronDown, Shield, Scale, FileText, Users, Lock, AlertTriangle, ArrowRight, Play, Search, Bell, User, Menu } from 'lucide-react';
 import { Button } from '$lib/components/ui/button';
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
+import { AlertTriangle, ArrowRight, Bell, FileText, Lock, Menu, Play, Scale, Search, Shield, User, Users } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useNavigation } from 'src/navigation/NavigationContext';
 
 const LegalPage = () => {
