@@ -2,8 +2,9 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import React, { useEffect } from "react";
 
 const Home = React.lazy(() => import("../pages/Home"));
-const SignUp = React.lazy(() => import("../pages/signup"));
 const NotFound = React.lazy(() => import("../pages/NotFound"));
+const SigninForm = React.lazy(() => import("../pages/Signin"));
+const SignupForm = React.lazy(() => import("../pages/signup"));
 
 export const AppRoutes = () => {
   const location = useLocation();
@@ -16,8 +17,9 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/signup" element={<SignUp />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/signin" element={<SigninForm />} />
+      <Route path="/signup" element={<SignupForm />} />
     </Routes>
   );
 };
