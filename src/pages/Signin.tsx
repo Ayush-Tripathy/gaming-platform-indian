@@ -1,5 +1,3 @@
-"use client"
-
 import type React from "react"
 
 import { useState } from "react"
@@ -22,8 +20,11 @@ export default function SigninPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle signin logic here
     console.log("Signin attempt:", formData)
+
+    window.localStorage.setItem("logged", "1")
+
+    goto("/")
   }
 
   const handleInputChange = (field: string, value: string) => {
