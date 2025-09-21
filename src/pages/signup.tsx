@@ -9,8 +9,11 @@ import { Label } from "$lib/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "$lib/components/ui/card"
 import { Eye, EyeOff, User, Mail, Lock } from "lucide-react"
 import signup from "/images/signup-bg.png"
+import { useNavigation } from "src/navigation/NavigationContext"
 
 export default function SignupPage() {
+  const { goto } = useNavigation()
+
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [formData, setFormData] = useState({
@@ -157,9 +160,11 @@ export default function SignupPage() {
             <div className="text-center pt-3 border-t border-purple-500/20">
               <p className="text-purple-200 text-sm">
                 Already have access?{" "}
-                <a href="/signin" className="text-purple-400 hover:text-purple-300 font-medium transition-colors">
+                <button onClick={() => {
+                  goto("/signin")
+                }} className="text-purple-400 hover:text-purple-300 font-medium transition-colors">
                   Sign In
-                </a>
+                </button>
               </p>
             </div>
           </CardContent>
