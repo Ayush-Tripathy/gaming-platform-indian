@@ -117,9 +117,11 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-purple-300 transition-colors duration-300">
+                <button onClick={() => {
+                  goto("/privacy")
+                }} className="hover:text-purple-300 transition-colors duration-300">
                   Privacy Policy
-                </a>
+                </button>
               </li>
               <li>
                 <button onClick={() => {
@@ -132,7 +134,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-purple-500/20 mt-16 pt-10 text-center text-gray-500">
-          <p>&copy; 2024 NEXUS Gaming. All rights reserved. Engineered for excellence.</p>
+          <p>&copy; 2025 NEXUS Gaming. All rights reserved. Engineered for excellence.</p>
         </div>
       </div>
     </footer>

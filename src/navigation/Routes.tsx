@@ -6,6 +6,7 @@ const NotFound = React.lazy(() => import("../pages/NotFound"));
 const SigninForm = React.lazy(() => import("../pages/Signin"));
 const SignupForm = React.lazy(() => import("../pages/signup"));
 const TermsAndConditions = React.lazy(() => import("../pages/terms-and-conditions"));
+const PrivacyPolicy = React.lazy(() => import("../pages/privacy-policy"));
 
 export const AppRoutes = () => {
   const location = useLocation();
@@ -19,6 +20,7 @@ export const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/terms" element={<TermsAndConditions />} />
+      <Route path="/privacy" element={<PrivacyPolicy />} />
       <Route path="/signin" element={<SigninForm />} />
       <Route path="/signup" element={<SignupForm />} />
       <Route path="*" element={<NotFound />} />

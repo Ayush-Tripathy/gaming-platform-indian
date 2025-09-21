@@ -1,9 +1,9 @@
 import { Button } from '$lib/components/ui/button';
-import { AlertTriangle, ArrowRight, Bell, FileText, Lock, Menu, Play, Scale, Search, Shield, User, Users } from 'lucide-react';
+import { Shield, Eye, Lock, Users, Database, AlertCircle, FileCheck, Menu, Play, Search, Bell, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigation } from 'src/navigation/NavigationContext';
 
-const LegalPage = () => {
+const PrivacyPolicyPage = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   const { goto } = useNavigation()
@@ -19,193 +19,121 @@ const LegalPage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const termsData = [
+  const privacyData = [
     {
       id: 1,
-      icon: <Users className="w-5 h-5" />,
-      title: "Your Account",
+      icon: <FileCheck className="w-5 h-5" />,
+      title: "Introduction",
       content: [
-        "You must register using true and accurate information.",
-        "Accounts are personal, non-transferable and may not be sold or leased.",
-        "If under 18, consent from a parent/guardian is mandatory (as per IT Act 2000, Sec. 11 read with Indian Contract Act 1872)."
+        'This Privacy Policy explains how [Platform Name] ("we", "our", "us") collects, uses, stores, and protects your personal information when you use our gaming platform, in compliance with the Digital Personal Data Protection Act, 2023 (DPDP Act), the Information Technology Act, 2000, and the Indian Constitution (Right to Privacy under Article 21).',
+        "By using our services, you agree to this Privacy Policy."
       ]
     },
     {
       id: 2,
-      icon: <AlertTriangle className="w-5 h-5" />,
-      title: "Account Termination & Suspension",
+      icon: <Database className="w-5 h-5" />,
+      title: "Information We Collect",
       content: [
-        "We reserve the right to suspend or terminate your account for:",
-        "• Violation of Terms of Service",
-        "• Involvement in fraud, money laundering, or illegal activity (IT Act Sec. 66D – cheating by personation, Sec. 66F – cyber terrorism)",
-        "• Abusive or offensive behavior against other users",
-        "Termination may result in loss of in-game assets and virtual currency."
+        "We may collect the following information:",
+        "Personal Information: Name, email ID, phone number, date of birth, and gender.",
+        "Gameplay Information: Scores, achievements, game history, preferences.",
+        "Device & Technical Data: IP address, browser, operating system, device ID, cookies.",
+        "Payment Information: UPI, card details, or wallet information (processed securely via RBI-compliant payment gateways).",
+        "Parental Consent Data: For users under 18, we may request guardian details."
       ]
     },
     {
       id: 3,
-      icon: <FileText className="w-5 h-5" />,
-      title: "License to Use",
+      icon: <Eye className="w-5 h-5" />,
+      title: "Purpose of Data Collection",
       content: [
-        "You are granted a limited, non-exclusive, revocable license to access and use the Platform for entertainment purposes.",
-        "No reverse engineering, copying, or commercial exploitation allowed (Copyright Act, 1957)."
+        "We collect your data to:",
+        "• Provide access to games and improve your gaming experience.",
+        "• Prevent cheating, fraud, or illegal activity (IT Act Sec. 66D, 66F).",
+        "• Process payments and manage transactions.",
+        "• Send you service-related updates and offers (with your consent).",
+        "• Comply with Indian legal requirements."
       ]
     },
     {
       id: 4,
       icon: <Shield className="w-5 h-5" />,
-      title: "Virtual Goods, Game Currency & Purchases",
+      title: "Data Protection & Security",
       content: [
-        "Virtual goods and in-game currency have no monetary value outside the Platform.",
-        "All purchases are final and non-refundable, except as required under Consumer Protection Act, 2019.",
-        "Payments processed in compliance with RBI guidelines & IT Act 2000 Sec. 43A (data security in financial transactions)."
+        "We use encryption, firewalls, and secure servers to protect user data.",
+        "Sensitive payment data is handled only by PCI-DSS & RBI-compliant payment partners.",
+        "In case of a data breach, we will notify users and authorities as per CERT-In Guidelines (2022)."
       ]
     },
     {
       id: 5,
-      icon: <Scale className="w-5 h-5" />,
-      title: "Fees & Taxes",
+      icon: <Users className="w-5 h-5" />,
+      title: "Data Sharing",
       content: [
-        "All transactions include applicable GST and other Indian taxes.",
-        "Users are responsible for any charges imposed by their payment providers."
+        "We do not sell your personal data.",
+        "We may share data only with:",
+        "• Legal authorities if required by law (IT Act Sec. 69 – lawful interception).",
+        "• Third-party service providers (e.g., payment gateways, analytics tools) – only with minimum required data."
       ]
     },
     {
       id: 6,
-      icon: <Users className="w-5 h-5" />,
-      title: "User Conduct Rules",
+      icon: <Lock className="w-5 h-5" />,
+      title: "User Rights (DPDP Act, 2023)",
       content: [
-        "Users must not:",
-        "• Post or share obscene, defamatory, or unlawful material (IT Act Sec. 67)",
-        "• Promote hate speech or violence (restricted under Article 19(2) of Constitution)",
-        "• Cheat, exploit bugs, or use unauthorized software (violates Sec. 65 – tampering with computer source code)",
-        "Respect for other users is mandatory (aligned with Article 14 – Right to Equality)."
+        "As a user, you have the right to:",
+        "• Access your personal data.",
+        "• Correct or update inaccurate data.",
+        "• Withdraw consent for data processing.",
+        "• Request deletion of your data (unless retention required by law).",
+        "• File grievances with our Grievance Officer."
       ]
     },
     {
       id: 7,
-      icon: <FileText className="w-5 h-5" />,
-      title: "User-Generated Content",
+      icon: <Users className="w-5 h-5" />,
+      title: "Children's Privacy",
       content: [
-        "You retain rights over your content, but grant us a license to use, display, and distribute it on the Platform.",
-        "Prohibited: obscene, harmful, infringing, or misleading content."
+        "Users under 18 years must have parental/guardian consent.",
+        "We do not knowingly collect data from children without such consent."
       ]
     },
     {
       id: 8,
-      icon: <Shield className="w-5 h-5" />,
-      title: "Monitoring & Anti-Cheat",
+      icon: <Eye className="w-5 h-5" />,
+      title: "Cookies & Tracking",
       content: [
-        "Platform may use anti-cheat tools and monitoring systems to detect unfair practices.",
-        "Data may be shared with authorities in compliance with IT Act Sec. 69 (lawful interception) & CERT-In directions (2022)."
+        "We may use cookies to improve gameplay experience, save preferences, and show relevant content.",
+        "You can disable cookies, but some features may not work properly."
       ]
     },
     {
       id: 9,
-      icon: <ArrowRight className="w-5 h-5" />,
-      title: "Updates & Modifications",
+      icon: <AlertCircle className="w-5 h-5" />,
+      title: "Grievance Redressal",
       content: [
-        "We may update the Platform, including rules, features, and terms, to comply with future Indian laws and improve services."
+        "As per IT Rules 2021, a Grievance Officer is appointed to address complaints.",
+        "Contact: grievance@nexus.in",
+        "Complaints acknowledged in 24 hours, resolved within 15 days."
       ]
     },
     {
       id: 10,
-      icon: <FileText className="w-5 h-5" />,
-      title: "Third-Party Services & Links",
+      icon: <FileCheck className="w-5 h-5" />,
+      title: "Governing Law",
       content: [
-        "Platform may provide links to payment gateways, advertisers, or third-party services.",
-        "We are not liable for their actions or privacy policies."
+        "This Privacy Policy is governed by:",
+        "• DPDP Act 2023 (data rights & consent)",
+        "• IT Act 2000 & IT Rules 2021 (data security, grievance handling)",
+        "• Indian Constitution (Article 21 – Right to Privacy)"
       ]
     },
     {
       id: 11,
-      icon: <Lock className="w-5 h-5" />,
-      title: "Intellectual Property Rights",
+      icon: <FileCheck className="w-5 h-5" />,
+      title: "Changes to Policy",
       content: [
-        "All Platform content, games, software, and branding are protected under Copyright Act 1957 & Trademarks Act 1999.",
-        "Users may not copy, distribute, or commercially exploit without consent."
-      ]
-    },
-    {
-      id: 12,
-      icon: <AlertTriangle className="w-5 h-5" />,
-      title: "Notice & Copyright Infringement",
-      content: [
-        "Users may report copyright violations under Sec. 51 of Copyright Act 1957.",
-        "A Copyright Grievance Officer will handle takedown requests under IT Rules, 2021."
-      ]
-    },
-    {
-      id: 13,
-      icon: <Shield className="w-5 h-5" />,
-      title: "Warranty Disclaimer",
-      content: [
-        "Services are provided \"as is\" without any warranty.",
-        "We do not guarantee uninterrupted or error-free operation."
-      ]
-    },
-    {
-      id: 14,
-      icon: <Scale className="w-5 h-5" />,
-      title: "Limitation of Liability",
-      content: [
-        "We are not liable for:",
-        "• Data loss, service downtime, or hacking (Sec. 43 – compensation for damage to computer system)",
-        "• Unauthorized transactions caused by user negligence",
-        "• Any indirect, incidental, or consequential damages"
-      ]
-    },
-    {
-      id: 15,
-      icon: <Scale className="w-5 h-5" />,
-      title: "Governing Law",
-      content: [
-        "These Terms are governed by:",
-        "• Indian Constitution (Art. 14, 19, 21)",
-        "• IT Act 2000",
-        "• DPDP Act 2023",
-        "• Consumer Protection Act 2019",
-        "Any disputes fall under the jurisdiction of Indian courts."
-      ]
-    },
-    {
-      id: 16,
-      icon: <Scale className="w-5 h-5" />,
-      title: "Dispute Resolution",
-      content: [
-        "Disputes first resolved via internal grievance redressal.",
-        "If unresolved, then arbitration under the Arbitration & Conciliation Act, 1996.",
-        "Venue: India."
-      ]
-    },
-    {
-      id: 17,
-      icon: <Lock className="w-5 h-5" />,
-      title: "Privacy & Data Protection",
-      content: [
-        "We collect only necessary data with user consent (DPDP Act, 2023).",
-        "Data stored securely, not sold to third parties.",
-        "User rights under DPDP Act: access, correction, withdrawal of consent, and deletion requests.",
-        "Sensitive data (like Aadhaar, PAN) not collected unless required by law."
-      ]
-    },
-    {
-      id: 18,
-      icon: <Users className="w-5 h-5" />,
-      title: "Grievance Redressal Mechanism",
-      content: [
-        "A Grievance Officer (as per IT Rules, 2021) will be appointed.",
-        "Contact: grievance@nexus.in",
-        "Complaints will be acknowledged within 24 hours and resolved within 15 days."
-      ]
-    },
-    {
-      id: 19,
-      icon: <FileText className="w-5 h-5" />,
-      title: "Miscellaneous",
-      content: [
-        "If any provision is found invalid, remaining clauses remain enforceable.",
-        "Platform reserves right to amend Terms as required by future Indian laws."
+        "We may update this Privacy Policy from time to time. Users will be notified of major changes."
       ]
     }
   ];
@@ -324,8 +252,8 @@ const LegalPage = () => {
         {/* Header Section */}
         <div className="text-center mb-20">
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-black/30 backdrop-blur-sm border border-white/20 text-white text-sm font-semibold tracking-wide mb-8">
-            <Scale className="w-4 h-4" />
-            [ LEGAL FRAMEWORK ]
+            <Shield className="w-4 h-4" />
+            [ PRIVACY FRAMEWORK ]
           </div>
           
           <h1
@@ -336,16 +264,16 @@ const LegalPage = () => {
               filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.1))'
             }}
           >
-            TERMS &<br />CONDITIONS
+            PRIVACY<br />POLICY
           </h1>
           
           <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light tracking-wide">
-            Legal framework governing your use of our{' '}
+            Comprehensive data protection guidelines for our{' '}
             <span className="text-white font-medium">gaming platform</span>
           </p>
         </div>
 
-        {/* Single Terms Card */}
+        {/* Single Privacy Policy Card */}
         <div className="max-w-6xl mx-auto mb-20">
           <div className="bg-black/40 backdrop-blur-md border border-white/10 p-8 md:p-12 relative overflow-hidden">
             {/* Corner decorative elements */}
@@ -355,26 +283,26 @@ const LegalPage = () => {
             <div className="absolute bottom-0 right-0 w-6 h-6 border-r-2 border-b-2 border-purple-500/60" />
 
             <div className="relative z-10 space-y-12">
-              {termsData.map((term) => (
-                <div key={term.id} className="border-b border-white/10 pb-8 last:border-b-0 last:pb-0">
+              {privacyData.map((section) => (
+                <div key={section.id} className="border-b border-white/10 pb-8 last:border-b-0 last:pb-0">
                   {/* Section Header */}
                   <div className="flex items-center gap-4 mb-6">
                     <div className="flex items-center justify-center w-12 h-12 bg-black/60 backdrop-blur-sm border border-purple-500/40 text-purple-300">
-                      {term.icon}
+                      {section.icon}
                     </div>
                     <div>
                       <div className="text-xs text-purple-400 font-bold tracking-widest mb-1">
-                        SECTION {term.id.toString().padStart(2, '0')}
+                        SECTION {section.id.toString().padStart(2, '0')}
                       </div>
                       <h3 className="text-xl md:text-2xl font-bold text-white tracking-wide">
-                        {term.title}
+                        {section.title}
                       </h3>
                     </div>
                   </div>
 
                   {/* Section Content */}
                   <div className="ml-16 space-y-3">
-                    {term.content.map((paragraph, pIndex) => (
+                    {section.content.map((paragraph, pIndex) => (
                       <p 
                         key={pIndex} 
                         className="text-gray-300 text-sm md:text-base leading-relaxed font-light"
@@ -397,15 +325,15 @@ const LegalPage = () => {
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-black/30 backdrop-blur-sm border border-purple-500/40 text-purple-300 text-sm font-bold tracking-wider">
               <Shield className="w-4 h-4" />
-              GOVERNED BY INDIAN LAW
+              DPDP ACT 2023 COMPLIANT
             </div>
             
             <p className="text-gray-400 text-lg leading-relaxed">
-              These terms are effective immediately and govern your use of our platform.
+              Your privacy is our priority. We are committed to protecting your data in accordance with Indian privacy laws.
               <br />
-              For any legal queries, contact our{' '}
-              <span className="text-purple-300 font-semibold">legal team</span> or{' '}
-              <span className="text-purple-300 font-semibold">grievance officer</span>.
+              For any privacy concerns, contact our{' '}
+              <span className="text-purple-300 font-semibold">Data Protection Officer</span> or{' '}
+              <span className="text-purple-300 font-semibold">Grievance Officer</span>.
             </p>
             
             <div className="text-sm text-gray-500 tracking-wide">
@@ -429,4 +357,4 @@ const LegalPage = () => {
   );
 };
 
-export default LegalPage
+export default PrivacyPolicyPage;

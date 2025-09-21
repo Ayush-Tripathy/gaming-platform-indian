@@ -79,7 +79,7 @@ export default function GamingPlatform() {
     {
       id: 1,
       title: "PHANTOM PRO SERIES",
-      dateRange: "Aug 15 - Sep 3, 2024",
+      dateRange: "Oct 15 - Nov 3, 2025",
       status: "ONLINE",
       format: "GROUP STAGE + BRACKET",
       description:
@@ -88,8 +88,8 @@ export default function GamingPlatform() {
     },
     {
       id: 2,
-      title: "IGNITION CUP 2024",
-      dateRange: "Oct 10 - Nov 1, 2024",
+      title: "IGNITION CUP 2025",
+      dateRange: "Oct 10 - Nov 1, 2025",
       status: "ONLINE",
       format: "SINGLE ELIMINATION",
       description:
@@ -372,7 +372,7 @@ export default function GamingPlatform() {
                     <button
                       key={index}
                       onClick={() => setCurrentVideo(index)}
-                      className={`px-6 py-3 rounded-lg border transition-all duration-300 ${
+                      className={`px-6 py-3 border transition-all duration-300 ${
                         index === currentVideo
                           ? "bg-purple-600/30 border-purple-400 text-white"
                           : "bg-black/30 border-purple-600/30 text-gray-400 hover:bg-purple-600/20"
