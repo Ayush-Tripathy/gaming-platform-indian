@@ -1,0 +1,94 @@
+/* Navbar container styles */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px; /* Adjust spacing as needed */
+    color: white;
+}
+
+/* Menu button */
+nav h5 {
+    font-size: 26px;
+    font-weight: 500;
+    cursor: pointer;
+    position: absolute;
+    right: 60px;
+    top: 40px;
+    z-index: 100;
+}
+
+/* Fullscreen menu container */
+#full {
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    background-color: rgba(10, 10, 10, 0.404);
+    color: #fff1d0;
+    top: -100vh; /* Hidden by default */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align text to the left */
+    justify-content: center; /* Center items vertically */
+    /* gap: 20px; Add spacing between menu items */
+    backdrop-filter: blur(10px);
+    padding: 3rem; /* Padding inside the menu */
+}
+
+/* Nav links */
+#full .nav-text {
+    font-size: 50px;
+    font-weight: 500;
+    width: 100%;
+    cursor: pointer;
+    border-bottom: 1px solid #fff0d1;
+    text-align: left; /* Align text to the left */
+    padding-bottom: 10px; /* Space between text and underline */
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+/* Hover effect */
+#full .nav-text:hover {
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+/* Close button */
+#full h5 {
+    cursor: pointer;
+    position: absolute;
+    top: 1.5rem;
+    right: 3.5rem;
+    z-index: 1500;
+    background: transparent;
+    border: none;   
+    scale: 1.3;
+}
+
+/* Responsive styles for smaller screens */
+@media only screen and (max-width: 600px) {
+    #full {
+        padding: 40px 20px; /* Reduce padding */
+    }
+
+    #full .nav-text {
+        font-size: 30px; /* Smaller text size */
+    }
+
+    nav {
+        padding: 20px 25px; /* Adjust navbar spacing */
+    }
+
+    nav h5 {
+        font-size: 20px;
+        top: 5%;
+        right: 5%;
+    }
+
+    #full h5 {
+        top: 4%;
+        right: 4%;
+        font-size: 20px;
+    }
+}
