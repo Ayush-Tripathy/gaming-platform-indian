@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { X, Cookie, Settings, Shield, Eye, BarChart3 } from 'lucide-react';
+import { BarChart3, Cookie, Eye, Settings, Shield, X } from 'lucide-react';
+import React, { useState } from 'react';
 
 interface CookieConsentProps {
   onAccept: (preferences: CookiePreferences) => void;
