@@ -40,11 +40,11 @@ export default function SignupPage() {
   const handleAgeVerification = () => {
     if (!dateOfBirth) return
     
-    const age = calculateAge(dateOfBirth)
-    if (age < 13) {
-      alert("You must be at least 13 years old to create an account.")
-      return
-    }
+    // const age = calculateAge(dateOfBirth)
+    // if (age < 18) {
+    //   alert("You must be at least 18 years old to create an account.")
+    //   return
+    // }
     
     setCurrentStep('signup-form')
   }
@@ -57,8 +57,9 @@ export default function SignupPage() {
       return
     }
     
-    // Handle signup logic here
     console.log("Signup attempt:", { ...formData, dateOfBirth })
+    window.localStorage.setItem("logged", "1")
+    goto("/")
   }
 
   const handleInputChange = (field: string, value: string) => {
@@ -139,7 +140,7 @@ export default function SignupPage() {
 
               <div className="text-center pt-3 border-t border-white/10">
                 <p className="text-gray-400 text-xs leading-relaxed">
-                  You must be at least 13 years old to create an account. Your date of birth will be kept secure and private.
+                  You must be at least 18 years old to create an account. Your date of birth will be kept secure and private.
                 </p>
               </div>
             </CardContent>
