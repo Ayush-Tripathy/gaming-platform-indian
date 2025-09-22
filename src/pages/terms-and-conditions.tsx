@@ -1,12 +1,9 @@
-import { Button } from '$lib/components/ui/button';
-import { AlertTriangle, ArrowRight, Bell, FileText, Lock, Menu, Play, Scale, Search, Shield, User, Users } from 'lucide-react';
+import Navbar from '$lib/components/Navbar/Navbar';
+import { AlertTriangle, ArrowRight, FileText, Lock, Scale, Shield, Users } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { useNavigation } from 'src/navigation/NavigationContext';
 
 const LegalPage = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
-
-  const { goto } = useNavigation()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -195,7 +192,7 @@ const LegalPage = () => {
       title: "Grievance Redressal Mechanism",
       content: [
         "A Grievance Officer (as per IT Rules, 2021) will be appointed.",
-        "Contact: grievance@nexus.in",
+        "Contact: grievance@GP.in",
         "Complaints will be acknowledged within 24 hours and resolved within 15 days."
       ]
     },
@@ -236,89 +233,7 @@ const LegalPage = () => {
         </div>
       </div>
 
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500`}>
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <button onClick={() => {
-              goto("/")
-            }} className="flex items-center space-x-4 hover:cursor-pointer">
-              <div className="w-12 h-12 gradient-accent rounded-xl flex items-center justify-center shadow-lg border border-white/10">
-                <Play className="w-7 h-7 text-white" />
-              </div>
-            </button>
-
-            <nav className="hidden lg:flex items-center space-x-8">
-              <a
-                href="#games"
-                className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
-              >
-                Games
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a
-                href="#tournaments"
-                className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
-              >
-                Tournaments
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a
-                href="#events"
-                className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
-              >
-                Events
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a
-                href="#community"
-                className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
-              >
-                Community
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            </nav>
-
-            <div className="flex items-center space-x-3">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hidden md:flex text-white hover:text-white bg-white/10 hover:bg-white/20 transition-all duration-300"
-              >
-                <Search className="w-4 h-4 mr-2" />
-                Search
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300 relative"
-              >
-                <Bell className="w-4 h-4" />
-                <span className="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full"></span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300"
-              >
-                <User className="w-4 h-4 mr-2" />
-                Login
-              </Button>
-              <Button
-                size="sm"
-                onClick={() => {
-                  goto("/signup")
-                }}
-                className="gradient-accent hover:opacity-90 font-bold shadow-lg border border-white/20 hover:scale-105 transition-all duration-300"
-              >
-                Get Started
-              </Button>
-              <Button variant="ghost" size="sm" className="lg:hidden text-white hover:bg-white/10">
-                <Menu className="w-5 h-5" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       <div className="container mx-auto px-4 py-36 relative z-10">
         {/* Header Section */}

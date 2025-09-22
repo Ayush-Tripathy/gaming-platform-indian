@@ -4,26 +4,10 @@ import { Button } from "$lib/components/ui/button"
 import { Card } from "$lib/components/ui/card"
 import { ChevronLeft, ChevronRight, ChevronDown, Menu, Star, Users, Play, Search, Bell, User, Trophy, Zap, Target, ArrowRight, Clock, CreditCard, Coins, LogOut } from "lucide-react"
 import { useNavigation } from "src/navigation/NavigationContext"
+import Navbar from "$lib/components/Navbar/Navbar"
 
 export default function GamingPlatform() {
   const [currentVideo, setCurrentVideo] = useState(0)
-  const [scrolled, setScrolled] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const { goto } = useNavigation()
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  useEffect(() => {
-    const val = window.localStorage.getItem("logged") === "1"
-    setIsLoggedIn(val)
-  }, [])
 
   const videoCarousel = [
     {
@@ -200,233 +184,9 @@ export default function GamingPlatform() {
     setCurrentVideo((prev) => (prev - 1 + videoCarousel.length) % videoCarousel.length)
   }
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    window.localStorage.setItem('logged', '0');
-  };
-
-  const handlePurchaseCredits = () => {
-    console.log('Purchase credits clicked');
-  };
-
   return (
     <div className="min-h-screen bg-black text-foreground overflow-x-hidden">
-      {/* <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "bg-white/10 backdrop-blur-md border-b border-white/10" : "bg-transparent"
-        }`}
-      >
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 gradient-accent rounded-xl flex items-center justify-center shadow-lg border border-white/10">
-                <Play className="w-7 h-7 text-white" />
-              </div>
-            </div>
-
-            <nav className="hidden lg:flex items-center space-x-8">
-              <a
-                href="#games"
-                className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
-              >
-                Games
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a
-                href="#tournaments"
-                className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
-              >
-                Tournaments
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a
-                href="#events"
-                className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
-              >
-                Events
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </a>
-              <a
-                href="#community"
-                className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
-              >
-                Community
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            </nav>
-
-            <div className="flex items-center space-x-3">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hidden md:flex text-white hover:text-white bg-white/10 hover:bg-white/20 transition-all duration-300"
-              >
-                <Search className="w-4 h-4 mr-2" />
-                Search
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300 relative"
-              >
-                <Bell className="w-4 h-4" />
-                <span className="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full"></span>
-              </Button>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => {
-                  goto("/signin")
-                }}
-                className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300"
-              >
-                <User className="w-4 h-4 mr-2" />
-                Login
-              </Button>
-              <Button
-                size="sm"
-                onClick={() => {
-                  goto("/signup")
-                }}
-                className="gradient-accent hover:opacity-90 font-bold shadow-lg border border-white/20 hover:scale-105 transition-all duration-300"
-              >
-                Get Started
-              </Button>
-              <Button variant="ghost" size="sm" className="lg:hidden text-white hover:bg-white/10">
-                <Menu className="w-5 h-5" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </motion.nav> */}
-
-      <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-white/10 backdrop-blur-md border-b border-white/10" : "bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 gradient-accent rounded-xl flex items-center justify-center shadow-lg border border-white/10">
-              <Play className="w-7 h-7 text-white" />
-            </div>
-          </div>
-
-          <nav className="hidden lg:flex items-center space-x-8">
-            <a
-              href="#games"
-              className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
-            >
-              Games
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a
-              href="#tournaments"
-              className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
-            >
-              Tournaments
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a
-              href="#events"
-              className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
-            >
-              Events
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a
-              href="#community"
-              className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
-            >
-              Community
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-            </a>
-          </nav>
-
-          <div className="flex items-center space-x-3">
-            <Button
-              variant="ghost"
-              size="sm"
-              className="hidden md:flex text-white hover:text-white bg-white/10 hover:bg-white/20 transition-all duration-300"
-            >
-              <Search className="w-4 h-4 mr-2" />
-              Search
-            </Button>
-            
-            {!isLoggedIn ? (
-              <>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => {
-                    goto("/signin")
-                  }}
-                  className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300"
-                >
-                  <User className="w-4 h-4 mr-2" />
-                  Login
-                </Button>
-                <Button
-                  size="sm"
-                  onClick={() => {
-                    goto("/signup")
-                  }}
-                  className="gradient-accent hover:opacity-90 font-bold shadow-lg border border-white/20 hover:scale-105 transition-all duration-300"
-                >
-                  Get Started
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300 relative"
-                >
-                  <Bell className="w-4 h-4" />
-                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full"></span>
-                </Button>
-
-                <div className="hidden md:flex items-center space-x-2 bg-white/10 rounded-lg px-3 py-2 border border-white/20">
-                  <Coins className="w-4 h-4 text-white" />
-                  <span className="text-white font-semibold text-sm">150</span>
-                  <span className="text-white/70 text-xs">credits</span>
-                </div>
-                
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handlePurchaseCredits}
-                  className="hidden md:flex text-white px-3 py-[18px] hover:text-white bg-green-500/20 hover:bg-green-500/30 transition-all duration-300 border border-green-400/30"
-                >
-                  <CreditCard className="w-4 h-4 mr-2" />
-                  Purchase
-                </Button>
-                
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleLogout}
-                  className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300"
-                >
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Logout
-                </Button>
-              </>
-            )}
-
-            <Button variant="ghost" size="sm" className="lg:hidden text-white hover:bg-white/10">
-              <Menu className="w-5 h-5" />
-            </Button>
-          </div>
-        </div>
-      </div>
-    </motion.nav>
+      <Navbar />
 
       <section className="relative h-screen overflow-hidden">
         <div className="absolute inset-0">
@@ -475,7 +235,8 @@ export default function GamingPlatform() {
                           md:text-7xl
                           lg:text-[8rem]
                           xl:text-[10rem]
-                          [@media_(min-width:1024px)_and_(max-height:930px)]:!text-[6rem] 
+                          [@media_(min-width:1024px)_and_(max-height:700px)]:!text-[5rem]
+                          [@media_(min-width:1024px)_and_(min-height:701px)_and_(max-height:930px)]:!text-[6rem]
                           font-black text-white tracking-wider leading-none"
             >
               DOMINATE
@@ -487,7 +248,12 @@ export default function GamingPlatform() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-base sm:text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed px-4"
+              className="
+              text-base 
+              sm:text-lg 
+              md:text-xl 
+              [@media_(min-width:1024px)_and_(max-height:700px)]:!text-lg 
+              text-gray-300 max-w-4xl mx-auto leading-relaxed px-4"
             >
               Experience the ultimate gaming ecosystem where skill meets technology. 
               <span className="hidden sm:inline"> Compete in tournaments, discover
@@ -499,7 +265,7 @@ export default function GamingPlatform() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5 }}
-              className="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8 py-8 md:py-16"
+              className="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8 py-8 md:py-16 [@media_(min-width:1024px)_and_(max-height:900px)]:py-4"
             >
               {/* Desktop navigation */}
               <div className="hidden md:flex items-center space-x-8">
@@ -517,7 +283,7 @@ export default function GamingPlatform() {
                     <button
                       key={index}
                       onClick={() => setCurrentVideo(index)}
-                      className={`px-6 py-3 border transition-all duration-300 ${
+                      className={`[@media_(min-width:1024px)_and_(max-height:900px)]:text-sm px-6 py-3 border transition-all duration-300 ${
                         index === currentVideo
                           ? "bg-purple-600/30 border-purple-400 text-white"
                           : "bg-black/30 border-purple-600/30 text-gray-400 hover:bg-purple-600/20"

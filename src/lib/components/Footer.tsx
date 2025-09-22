@@ -22,7 +22,7 @@ const Footer = () => {
                 <Play className="w-7 h-7 text-white" />
               </div>
               <div>
-                <span className="text-2xl font-bold text-white">NEXUS</span>
+                <span className="text-2xl font-bold text-white">GP</span>
                 <div className="text-xs text-purple-400 -mt-1 font-semibold">GAMING</div>
               </div>
             </div>
@@ -134,7 +134,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-purple-500/20 mt-16 pt-10 text-center text-gray-500">
-          <p>&copy; 2025 NEXUS Gaming. All rights reserved. Engineered for excellence.</p>
+          <p>&copy; 2025 GP Gaming. All rights reserved. Engineered for excellence.</p>
         </div>
       </div>
     </footer>

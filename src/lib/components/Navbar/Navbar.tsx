@@ -1,165 +1,161 @@
-import "./Navbar.css";
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { Link } from "react-router-dom";
-
-gsap.registerPlugin(useGSAP);
+import { Button } from "$lib/components/ui/button"
+import { motion } from "framer-motion"
+import { Bell, Coins, CreditCard, LogOut, Menu, Play, Search, User } from "lucide-react"
+import { useEffect, useState } from "react"
+import { useNavigation } from "src/navigation/NavigationContext"
 
 export default function Navbar() {
-  const container = useRef<HTMLDivElement>(null);
-  const menuBtn = useRef<HTMLHeadingElement>(null);
-  const closeBtn = useRef<HTMLHeadingElement>(null);
-  const itemsContainer = useRef<HTMLDivElement>(null);
-  const timeline = useRef<gsap.core.Timeline | null>(null);
+  const [scrolled, setScrolled] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useGSAP(
-    () => {
-      const tl: gsap.core.Timeline = gsap.timeline();
-      timeline.current = tl;
-
-      tl.to("#full", {
-        top: 0,
-        delay: 0.3,
-        duration: 0.3,
-      });
-
-      tl.from("#full .nav-text", {
-        x: 150,
-        duration: 0.2,
-        stagger: 0.22,
-        opacity: 0,
-      });
-
-      tl.pause();
-
-      const menuBtnClickHandler = () => {
-        tl.play();
-        // itemsContainer.current?.addEventListener("click", preventDefault);
-        itemsContainer.current?.addEventListener("wheel", preventDefault);
-        itemsContainer.current?.addEventListener("touchmove", preventDefault);
-      };
-
-      const closeBtnClickHandler = () => {
-        tl.reverse();
-        // itemsContainer.current?.removeEventListener("click", preventDefault);
-        itemsContainer.current?.removeEventListener("wheel", preventDefault);
-        itemsContainer.current?.removeEventListener(
-          "touchmove",
-          preventDefault
-        );
-      };
-
-      menuBtn.current?.addEventListener("click", menuBtnClickHandler);
-
-      closeBtn.current?.addEventListener("click", closeBtnClickHandler);
-
-      return () => {
-        menuBtn.current?.removeEventListener("click", menuBtnClickHandler);
-        closeBtn.current?.removeEventListener("click", closeBtnClickHandler);
-      };
-    },
-    { scope: container }
-  );
-
-  const preventDefault = (e: Event) => {
-    e?.preventDefault();
-    e?.stopPropagation();
-  };
+  const { goto } = useNavigation()
 
   useEffect(() => {
-    const handleResize = () => {
-      itemsContainer.current?.style.setProperty("top", `-100vh`);
-    };
-    window.addEventListener("resize", handleResize);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  useEffect(() => {
+    const val = window.localStorage.getItem("logged") === "1"
+    setIsLoggedIn(val)
+  }, [])
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    window.localStorage.setItem('logged', '0');
+  };
+
+  const handlePurchaseCredits = () => {
+    console.log('Purchase credits clicked');
+  };
 
   return (
-    <div>
-      <div id="main" ref={container}>
-        <nav>
-          <h5
-            ref={menuBtn}
-            id="menuBtn"
-            className="border-y-2 border-y-primary-400 h-3 w-7 sm:w-10"
-          ></h5>{" "}
-        </nav>
-        <div
-          ref={itemsContainer}
-          id="full"
-          className="overflow-hidden font-[AdieuRegular]"
-        >
-          <Link to="/" className="nav-text">
-            // HOME
-          </Link>
-          {/* <a
-            onClick={() => {
-              timeline.current?.reverse();
-              itemsContainer.current?.removeEventListener(
-                "wheel",
-                preventDefault
-              );
-              itemsContainer.current?.removeEventListener(
-                "touchmove",
-                preventDefault
-              );
-            }}
-            href="#about"
-            className="nav-text"
-          >
-            // ABOUT
-          </a> */}
-          <Link to="/gallery" className="nav-text">
-            // GALLERY
-          </Link>
-          <Link to="/events" className="nav-text">
-            // EVENTS
-          </Link>
-          {/* <Link to="/sponsor" className="nav-text">
-            // SPONSOR
-          </Link> */}
-          <a
-            onClick={() => {
-              timeline.current?.reverse();
-              itemsContainer.current?.removeEventListener(
-                "wheel",
-                preventDefault
-              );
-              itemsContainer.current?.removeEventListener(
-                "touchmove",
-                preventDefault
-              );
-            }}
-            href="#sponsors"
-            className="nav-text"
-          >
-            // SPONSOR
-          </a>
-          <Link to="/team" className="nav-text">
-            // TEAM
-          </Link>
-          <Link to="/memories" className="nav-text">
-            // MEMORIES
-          </Link>
+  <motion.nav
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      scrolled ? "bg-white/10 backdrop-blur-md border-b border-white/10" : "bg-transparent"
+    }`}
+  >
+    <div className="container mx-auto px-6 py-4">
+      <div className="flex items-center justify-between">
+        <button onClick={() => goto("/")} className="flex items-center space-x-4 cursor-pointer">
+          <div className="w-12 h-12 gradient-accent rounded-xl flex items-center justify-center shadow-lg border border-white/10">
+            <Play className="w-7 h-7 text-white" />
+          </div>
+        </button>
 
-          <h5 ref={closeBtn}>
-            <svg
-              className="fill-primary-400 w-10 h-10"
-              width="24"
-              viewBox="0 0 24 24"
-              height="24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path fill="none" d="M0 0h24v24H0V0z"></path>
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path>
-            </svg>
-          </h5>
+        <nav className="hidden lg:flex items-center space-x-8">
+          <a
+            href="#games"
+            className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
+          >
+            Games
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a
+            href="#tournaments"
+            className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
+          >
+            Tournaments
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a
+            href="#events"
+            className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
+          >
+            Events
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
+          <a
+            href="#community"
+            className="text-white hover:text-white transition-all duration-300 font-semibold text-sm uppercase tracking-wide hover:scale-105 transform relative group"
+          >
+            Community
+            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+          </a>
+        </nav>
+
+        <div className="flex items-center space-x-3">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="hidden md:flex text-white hover:text-white bg-white/10 hover:bg-white/20 transition-all duration-300"
+          >
+            <Search className="w-4 h-4 mr-2" />
+            Search
+          </Button>
+          
+          {!isLoggedIn ? (
+            <>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  goto("/signin")
+                }}
+                className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300"
+              >
+                <User className="w-4 h-4 mr-2" />
+                Login
+              </Button>
+              <Button
+                size="sm"
+                onClick={() => {
+                  goto("/signup")
+                }}
+                className="gradient-accent hover:opacity-90 font-bold shadow-lg border border-white/20 hover:scale-105 transition-all duration-300"
+              >
+                Get Started
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300 relative"
+              >
+                <Bell className="w-4 h-4" />
+                <span className="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full"></span>
+              </Button>
+
+              <div className="hidden md:flex items-center space-x-2 bg-white/10 rounded-lg px-3 py-2 border border-white/20">
+                <Coins className="w-4 h-4 text-white" />
+                <span className="text-white font-semibold text-sm">150</span>
+                <span className="text-white/70 text-xs">credits</span>
+              </div>
+              
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handlePurchaseCredits}
+                className="hidden md:flex text-white px-3 py-[18px] hover:text-white bg-green-500/20 hover:bg-green-500/30 transition-all duration-300 border border-green-400/30"
+              >
+                <CreditCard className="w-4 h-4 mr-2" />
+                Purchase
+              </Button>
+              
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleLogout}
+                className="hidden md:flex text-white hover:text-white hover:bg-white/10 transition-all duration-300"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </Button>
+            </>
+          )}
+
+          <Button variant="ghost" size="sm" className="lg:hidden text-white hover:bg-white/10">
+            <Menu className="w-5 h-5" />
+          </Button>
         </div>
       </div>
     </div>
-  );
+  </motion.nav>)
 }
