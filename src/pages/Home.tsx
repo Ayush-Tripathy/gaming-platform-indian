@@ -5,6 +5,7 @@ import { Card } from "$lib/components/ui/card"
 import { ChevronLeft, ChevronRight, ChevronDown, Menu, Star, Users, Play, Search, Bell, User, Trophy, Zap, Target, ArrowRight, Clock, CreditCard, Coins, LogOut } from "lucide-react"
 import { useNavigation } from "src/navigation/NavigationContext"
 import Navbar from "$lib/components/Navbar/Navbar"
+import CookieConsent from "$lib/components/cookie-consent"
 
 export default function GamingPlatform() {
   const [currentVideo, setCurrentVideo] = useState(0)
@@ -184,9 +185,22 @@ export default function GamingPlatform() {
     setCurrentVideo((prev) => (prev - 1 + videoCarousel.length) % videoCarousel.length)
   }
 
+  const handleAccept = (preferences) => {
+    console.log('Cookie preferences:', preferences);
+  };
+
+  const handleDecline = () => {
+    console.log('Cookies declined');
+  };
+
   return (
     <div className="min-h-screen bg-black text-foreground overflow-x-hidden">
       <Navbar />
+
+      <CookieConsent 
+        onAccept={handleAccept} 
+        onDecline={handleDecline} 
+      />
 
       <section className="relative h-screen overflow-hidden">
         <div className="absolute inset-0">
