@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { Button } from "$lib/components/ui/button"
-import { Card } from "$lib/components/ui/card"
-import { ChevronLeft, ChevronRight, ChevronDown, Menu, Star, Users, Play, Search, Bell, User, Trophy, Zap, Target, ArrowRight, Clock, CreditCard, Coins, LogOut } from "lucide-react"
-import { useNavigation } from "src/navigation/NavigationContext"
 import Navbar from "$lib/components/Navbar/Navbar"
 import CookieConsent from "$lib/components/cookie-consent"
+import { Button } from "$lib/components/ui/button"
+import { Card } from "$lib/components/ui/card"
+import { motion } from "framer-motion"
+import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Clock, Star, Target, Trophy, Users, Zap } from "lucide-react"
+import { useState } from "react"
 
 export default function GamingPlatform() {
   const [currentVideo, setCurrentVideo] = useState(0)
