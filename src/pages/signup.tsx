@@ -24,18 +24,18 @@ export default function SignupPage() {
     confirmPassword: "",
   })
 
-  const calculateAge = (birthDate: string) => {
-    const today = new Date()
-    const birth = new Date(birthDate)
-    let age = today.getFullYear() - birth.getFullYear()
-    const monthDiff = today.getMonth() - birth.getMonth()
+  // const calculateAge = (birthDate: string) => {
+  //   const today = new Date()
+  //   const birth = new Date(birthDate)
+  //   let age = today.getFullYear() - birth.getFullYear()
+  //   const monthDiff = today.getMonth() - birth.getMonth()
     
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-      age--
-    }
+  //   if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+  //     age--
+  //   }
     
-    return age
-  }
+  //   return age
+  // }
 
   const handleAgeVerification = () => {
     if (!dateOfBirth) return
